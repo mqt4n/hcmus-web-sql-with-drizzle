@@ -2,13 +2,9 @@ import { defineConfig } from 'drizzle-kit';
 
 export default defineConfig({
   dialect: 'sqlite',
-
-  // Sửa đường dẫn schema: THÊM PHẦN MỞ RỘNG FILE (.js)
-  schema: './src/db/schema.js',
-
+  schema: './src/db/schema.ts', // Đổi từ .js sang .ts
   out: './src/db/migrations',
-
   dbCredentials: {
-    url: './src/db/sqlite.db',
+    url: './src/db/sqlite.db', // Đường dẫn file DB
   },
 });

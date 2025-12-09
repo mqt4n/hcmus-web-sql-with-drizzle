@@ -1,9 +1,8 @@
-import { db } from './drizzle.js';
-import { giaoVien, nguoiThan, gvDt, chuDe, deTai, congViec, thamGiaDt, khoa, boMon } from './schema.js';
-
+import { db } from '../index';
+import * as schema from './schema';
 import { eq } from 'drizzle-orm';
 
-const giaoVienData = [
+const giaoVienData: schema.GiaoVienInsert[] = [
   {
     magv: '001',
     hoTen: 'Nguyễn Hoài An',
@@ -11,8 +10,6 @@ const giaoVienData = [
     phai: 'Nam',
     ngSinh: '1973-02-15',
     diaChi: '25/3 Lạc Long Quân, Q.10, TP HCM',
-    gvqlcm: null,
-    mabm: null,
   },
   {
     magv: '002',
@@ -21,8 +18,6 @@ const giaoVienData = [
     phai: 'Nữ',
     ngSinh: '1960-06-20',
     diaChi: '125 Trần Hưng Đạo, Q.1, TP HCM',
-    gvqlcm: null,
-    mabm: null,
   },
   {
     magv: '003',
@@ -31,8 +26,6 @@ const giaoVienData = [
     phai: 'Nữ',
     ngSinh: '1975-05-11',
     diaChi: '12/21 Võ Văn Ngân Thủ Đức, TPHCM',
-    gvqlcm: null,
-    mabm: null,
   },
   {
     magv: '004',
@@ -41,8 +34,6 @@ const giaoVienData = [
     phai: 'Nam',
     ngSinh: '1959-06-20',
     diaChi: '215 Lý Thường Kiệt, TP Biên Hoà',
-    gvqlcm: null,
-    mabm: null,
   },
   {
     magv: '005',
@@ -51,8 +42,6 @@ const giaoVienData = [
     phai: 'Nam',
     ngSinh: '1954-10-23',
     diaChi: '22/5 Nguyễn Xí, Q. Bình Thạnh, TP HCM',
-    gvqlcm: null,
-    mabm: null,
   },
   {
     magv: '006',
@@ -61,8 +50,6 @@ const giaoVienData = [
     phai: 'Nữ',
     ngSinh: '1980-05-20',
     diaChi: '127 Hùng Vương, TP Mỹ Tho',
-    gvqlcm: null,
-    mabm: null,
   },
   {
     magv: '007',
@@ -71,8 +58,6 @@ const giaoVienData = [
     phai: 'Nam',
     ngSinh: '1976-06-05',
     diaChi: '234 3/2, TP Biên Hoà',
-    gvqlcm: null,
-    mabm: null,
   },
   {
     magv: '008',
@@ -81,8 +66,6 @@ const giaoVienData = [
     phai: 'Nam',
     ngSinh: '1977-08-06',
     diaChi: '22/11 Lý Thường Kiệt, TP Mỹ Tho',
-    gvqlcm: null,
-    mabm: null,
   },
   {
     magv: '009',
@@ -91,8 +74,6 @@ const giaoVienData = [
     phai: 'Nam',
     ngSinh: '1975-11-22',
     diaChi: '234 Trần Não, An Phú, TP HCM',
-    gvqlcm: null,
-    mabm: null,
   },
   {
     magv: '010',
@@ -101,12 +82,10 @@ const giaoVienData = [
     phai: 'Nam',
     ngSinh: '1980-12-12',
     diaChi: '221 Hùng Vương, Q.5, TP HCM',
-    gvqlcm: null,
-    mabm: null,
   },
 ];
 
-const khoaData = [
+const khoaData: schema.KhoaInsert[] = [
   {
     maKhoa: 'CNTT',
     tenKhoa: 'Công nghệ thông tin',
@@ -145,7 +124,7 @@ const khoaData = [
   },
 ];
 
-const boMonData = [
+const boMonData: schema.BoMonInsert[] = [
   {
     mabm: 'CNTT',
     tenBm: 'Công nghệ tri thức',
@@ -238,13 +217,13 @@ const boMonData = [
   },
 ];
 
-const chuDeData = [
+const chuDeData: schema.ChuDeInsert[] = [
   { macd: 'NCPT', tenCd: 'Nghiên cứu phát triển' },
   { macd: 'QLGD', tenCd: 'Quản lý giáo dục' },
   { macd: 'ƯDCN', tenCd: 'Ứng dụng công nghệ' },
 ];
 
-const deTaiData = [
+const deTaiData: schema.DeTaiInsert[] = [
   {
     madt: '001',
     tenDt: 'HTTT quản lý các trường ĐH',
@@ -317,7 +296,7 @@ const deTaiData = [
   },
 ];
 
-const congViecData = [
+const congViecData: schema.CongViecInsert[] = [
   { madt: '001', sott: 1, tenCv: 'Khởi tạo và Lập kế hoạch', ngayBd: '2007-10-20', ngayKt: '2008-12-20' },
   { madt: '001', sott: 2, tenCv: 'Xác định yêu cầu', ngayBd: '2008-12-21', ngayKt: '2008-03-21' },
   { madt: '001', sott: 3, tenCv: 'Phân tích hệ thống', ngayBd: '2008-03-22', ngayKt: '2008-05-22' },
@@ -332,7 +311,7 @@ const congViecData = [
   { madt: '006', sott: 2, tenCv: 'Nuôi cấy', ngayBd: '2007-02-21', ngayKt: '2008-08-21' },
 ];
 
-const thamGiaDtData = [
+const thamGiaDtData: schema.ThamGiaDtInsert[] = [
   { magv: '001', madt: '002', stt: 1, phuCap: 0, ketQua: null },
   { magv: '001', madt: '002', stt: 2, phuCap: 2, ketQua: null },
   { magv: '002', madt: '001', stt: 4, phuCap: 2, ketQua: 'Đạt' },
@@ -347,7 +326,7 @@ const thamGiaDtData = [
   { magv: '009', madt: '002', stt: 4, phuCap: 1.5, ketQua: null },
 ];
 
-const nguoiThanData = [
+const nguoiThanData: schema.NguoiThanInsert[] = [
   { magv: '001', ten: 'Hùng', ngSinh: '1990-01-14', phai: 'Nam' },
   { magv: '001', ten: 'Thủy', ngSinh: '1994-12-08', phai: 'Nữ' },
   { magv: '003', ten: 'Hà', ngSinh: '1998-09-03', phai: 'Nữ' },
@@ -359,7 +338,7 @@ const nguoiThanData = [
   { magv: '010', ten: 'Nguyệt', ngSinh: '2006-01-14', phai: 'Nữ' },
 ];
 
-const gvDtData = [
+const gvDtData: schema.GvDtInsert[] = [
   { magv: '001', dienThoai: '0838912112' },
   { magv: '001', dienThoai: '0903123123' },
   { magv: '002', dienThoai: '0913454545' },
@@ -385,63 +364,40 @@ const giaoVienUpdateData = [
 ];
 
 async function seed() {
-  console.log('--- Bắt đầu Seeding Dữ Liệu ---');
+  await db.delete(schema.gvDt).execute();
+  await db.delete(schema.nguoiThan).execute();
+  await db.delete(schema.thamGiaDt).execute();
+  await db.delete(schema.congViec).execute();
+  await db.delete(schema.deTai).execute();
+  await db.delete(schema.chuDe).execute();
+  await db.delete(schema.boMon).execute();
+  await db.delete(schema.khoa).execute();
+  await db.delete(schema.giaoVien).execute();
 
-  await db.delete(thamGiaDt);
-  await db.delete(congViec);
-  await db.delete(deTai);
-  await db.delete(chuDe);
-  await db.delete(nguoiThan);
-  await db.delete(gvDt);
-  await db.delete(boMon);
-  await db.delete(khoa);
-  await db.delete(giaoVien);
-
-  console.log('Dữ liệu cũ đã được xóa.');
-
-  await db.insert(giaoVien).values(giaoVienData);
-  console.log('1. GIAOVIEN đã được thêm.');
-
-  await db.insert(khoa).values(khoaData);
-  console.log('2. KHOA đã được thêm.');
-
-  await db.insert(boMon).values(boMonData);
-  console.log('3. BOMON đã được thêm.');
-
-  await db.insert(chuDe).values(chuDeData);
-  console.log('4. CHUDE đã được thêm.');
-
-  await db.insert(deTai).values(deTaiData);
-  console.log('5. DETAI đã được thêm.');
-
-  await db.insert(congViec).values(congViecData);
-  console.log('6. CONGVIEC đã được thêm.');
-
-  await db.insert(thamGiaDt).values(thamGiaDtData);
-  console.log('7. THAMGIADT đã được thêm.');
-
-  await db.insert(nguoiThan).values(nguoiThanData);
-  console.log('8. NGUOITHAN đã được thêm.');
-
-  await db.insert(gvDt).values(gvDtData);
-  console.log('9. GV_DT đã được thêm.');
-
+  await db.insert(schema.giaoVien).values(giaoVienData).execute();
+  await db.insert(schema.khoa).values(khoaData).execute();
+  await db.insert(schema.boMon).values(boMonData).execute();
+  await db.insert(schema.chuDe).values(chuDeData).execute();
+  await db.insert(schema.deTai).values(deTaiData).execute();
+  await db.insert(schema.congViec).values(congViecData).execute();
+  await db.insert(schema.thamGiaDt).values(thamGiaDtData).execute();
+  await db.insert(schema.nguoiThan).values(nguoiThanData).execute();
+  await db.insert(schema.gvDt).values(gvDtData).execute();
   for (const updateItem of giaoVienUpdateData) {
     await db
-      .update(giaoVien)
+      .update(schema.giaoVien)
       .set({ gvqlcm: updateItem.gvqlcm, mabm: updateItem.mabm })
-      .where(eq(giaoVien.magv, updateItem.magv));
+      .where(eq(schema.giaoVien.magv, updateItem.magv))
+      .execute();
   }
-  console.log('10. GIAOVIEN đã được cập nhật FK.');
-
-  console.log('--- Seeding Dữ Liệu Hoàn Tất! ---');
 }
 
 seed()
   .then(() => {
+    console.log('Seeding successfully.');
     process.exit(0);
   })
   .catch((err) => {
-    console.error('Seeding thất bại:', err);
+    console.error('Seeding fail:', err);
     process.exit(1);
   });

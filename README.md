@@ -1,34 +1,123 @@
-# Run server
-```bash
-npm run dev
-```
-# Demo SQL Drizzle ORM
-This is a simple demo project showcasing the use of Drizzle ORM with SQLite in a Node.js environment. The project includes basic CRUD operations for managing teachers in a database.
-## Project Structure
-- `src/db/drizzle.js`: Sets up the Drizzle ORM with SQLite.
-- `src/db/schema.js`: Defines the database schema for the `giaoVien` (teacher) table.
-- `src/services/teacher.service.js`: Contains service functions for CRUD operations on the `giaoVien` table.
+# HCMUS Web SQL with Drizzle
+
+A TypeScript project using Drizzle ORM with SQLite database for managing university data (teachers, departments, projects, etc.).
+
 ## Prerequisites
-- Node.js installed on your machine.
-- SQLite installed (optional, as the database file will be created automatically).
+
+- Node.js (v16 or higher)
+- npm or yarn
+
 ## Installation
-1. Clone the repository:
-```bash
-git clone <repository-url>
-```
-2. Navigate to the project directory:
-```bash
-cd demo-sql-drizzle
-```
-3. Install the dependencies:
+
+Install dependencies:
+
 ```bash
 npm install
 ```
-## Usage
-1. Start the server:
+
+## Database Setup
+
+### 1. Push Schema to Database
+
+Create/update the database schema:
+
 ```bash
-npm run dev
+npm run push
 ```
-2. The server will execute the CRUD operations defined in `src/index.js` and log the results to the console.
-## License
-This project is licensed under the MIT License.
+
+### 2. Seed Database
+
+Populate the database with initial data:
+
+```bash
+npm run seed
+```
+
+## Available Scripts
+
+### Development
+
+- `npm run dev` - Run TypeScript compiler in watch mode
+- `npm run build` - Build the project
+- `npm run typecheck` - Run TypeScript type checking
+
+### Database Management
+
+- `npm run push` - Push schema changes to the database
+- `npm run pull` - Pull schema from existing database
+- `npm run gen` - Generate migration files
+- `npm run mi` - Run migrations
+- `npm run studio` - Open Drizzle Studio (database GUI)
+- `npm run seed` - Seed database with initial data
+- `npm run check` - Check for schema issues
+
+### Testing
+
+- `npm run test` - Run test file
+
+## Project Structure
+
+```
+src/
+├── db/
+│   ├── index.ts       # Database connection
+│   ├── schema.ts      # Database schema definitions
+│   └── seed.ts        # Seed data
+└── types/
+    ├── giaoVien.ts    # Teacher types
+    ├── khoa.ts        # Faculty types
+    ├── boMon.ts       # Department types
+    ├── chuDe.ts       # Topic types
+    ├── deTai.ts       # Project types
+    ├── congViec.ts    # Task types
+    ├── thamGiaDt.ts   # Project participation types
+    ├── nguoiThan.ts   # Relative types
+    └── gvDt.ts        # Teacher phone types
+```
+
+## Database Schema
+
+The project includes the following tables:
+
+- **GIAOVIEN** - Teachers
+- **KHOA** - Faculties
+- **BOMON** - Departments
+- **CHUDE** - Topics
+- **DETAI** - Projects
+- **CONGVIEC** - Tasks
+- **THAMGIADT** - Project Participation
+- **NGUOITHAN** - Relatives
+- **GV_DT** - Teacher Phone Numbers
+
+## Quick Start
+
+1. Install dependencies:
+
+   ```bash
+   npm install
+   ```
+
+2. Setup database:
+
+   ```bash
+   npm run push
+   ```
+
+3. Seed data:
+
+   ```bash
+   npm run seed
+   ```
+
+4. View database in Drizzle Studio:
+   ```bash
+   npm run studio
+   ```
+
+## Technologies
+
+- **Drizzle ORM** - TypeScript ORM
+- **better-sqlite3** - SQLite database driver
+- **Zod** - Schema validation
+- **TypeScript** - Type safety
+- **tsup** - TypeScript bundler
