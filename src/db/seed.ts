@@ -364,15 +364,19 @@ const giaoVienUpdateData = [
 ];
 
 async function seed() {
-  await db.delete(schema.gvDt).execute();
-  await db.delete(schema.nguoiThan).execute();
-  await db.delete(schema.thamGiaDt).execute();
-  await db.delete(schema.congViec).execute();
-  await db.delete(schema.deTai).execute();
-  await db.delete(schema.chuDe).execute();
-  await db.delete(schema.boMon).execute();
-  await db.delete(schema.khoa).execute();
-  await db.delete(schema.giaoVien).execute();
+  try {
+    await db.delete(schema.gvDt).execute();
+    await db.delete(schema.nguoiThan).execute();
+    await db.delete(schema.thamGiaDt).execute();
+    await db.delete(schema.congViec).execute();
+    await db.delete(schema.deTai).execute();
+    await db.delete(schema.chuDe).execute();
+    await db.delete(schema.boMon).execute();
+    await db.delete(schema.khoa).execute();
+    await db.delete(schema.giaoVien).execute();
+  } catch (error) {
+    // Tables might not exist yet, continue with insert
+  }
 
   await db.insert(schema.giaoVien).values(giaoVienData).execute();
   await db.insert(schema.khoa).values(khoaData).execute();
