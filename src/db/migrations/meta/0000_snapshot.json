@@ -1,0 +1,631 @@
+{
+  "version": "6",
+  "dialect": "sqlite",
+  "id": "d619ed82-37ab-46d5-a4db-61d32f73eef2",
+  "prevId": "00000000-0000-0000-0000-000000000000",
+  "tables": {
+    "BOMON": {
+      "name": "BOMON",
+      "columns": {
+        "MABM": {
+          "name": "MABM",
+          "type": "text(10)",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "TENBM": {
+          "name": "TENBM",
+          "type": "text(50)",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "PHONG": {
+          "name": "PHONG",
+          "type": "text(10)",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "DIENTHOAI": {
+          "name": "DIENTHOAI",
+          "type": "text(10)",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "TRUONGBM": {
+          "name": "TRUONGBM",
+          "type": "text(10)",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "MAKHOA": {
+          "name": "MAKHOA",
+          "type": "text(10)",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "NGAYNHANCHUC": {
+          "name": "NGAYNHANCHUC",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "BOMON_TRUONGBM_GIAOVIEN_MAGV_fk": {
+          "name": "BOMON_TRUONGBM_GIAOVIEN_MAGV_fk",
+          "tableFrom": "BOMON",
+          "tableTo": "GIAOVIEN",
+          "columnsFrom": [
+            "TRUONGBM"
+          ],
+          "columnsTo": [
+            "MAGV"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "BOMON_MAKHOA_KHOA_MAKHOA_fk": {
+          "name": "BOMON_MAKHOA_KHOA_MAKHOA_fk",
+          "tableFrom": "BOMON",
+          "tableTo": "KHOA",
+          "columnsFrom": [
+            "MAKHOA"
+          ],
+          "columnsTo": [
+            "MAKHOA"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "checkConstraints": {}
+    },
+    "CHUDE": {
+      "name": "CHUDE",
+      "columns": {
+        "MACD": {
+          "name": "MACD",
+          "type": "text(10)",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "TENCD": {
+          "name": "TENCD",
+          "type": "text(50)",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "checkConstraints": {}
+    },
+    "CONGVIEC": {
+      "name": "CONGVIEC",
+      "columns": {
+        "MADT": {
+          "name": "MADT",
+          "type": "text(10)",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "SOTT": {
+          "name": "SOTT",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "TENCV": {
+          "name": "TENCV",
+          "type": "text(50)",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "NGAYBD": {
+          "name": "NGAYBD",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "NGAYKT": {
+          "name": "NGAYKT",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "CONGVIEC_MADT_DETAI_MADT_fk": {
+          "name": "CONGVIEC_MADT_DETAI_MADT_fk",
+          "tableFrom": "CONGVIEC",
+          "tableTo": "DETAI",
+          "columnsFrom": [
+            "MADT"
+          ],
+          "columnsTo": [
+            "MADT"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {
+        "CONGVIEC_MADT_SOTT_pk": {
+          "columns": [
+            "MADT",
+            "SOTT"
+          ],
+          "name": "CONGVIEC_MADT_SOTT_pk"
+        }
+      },
+      "uniqueConstraints": {},
+      "checkConstraints": {}
+    },
+    "DETAI": {
+      "name": "DETAI",
+      "columns": {
+        "MADT": {
+          "name": "MADT",
+          "type": "text(10)",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "TENDT": {
+          "name": "TENDT",
+          "type": "text(50)",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "CAPQL": {
+          "name": "CAPQL",
+          "type": "text(50)",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "KINHPHI": {
+          "name": "KINHPHI",
+          "type": "real",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "NGAYBD": {
+          "name": "NGAYBD",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "NGAYKT": {
+          "name": "NGAYKT",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "MACD": {
+          "name": "MACD",
+          "type": "text(10)",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "GVCNDT": {
+          "name": "GVCNDT",
+          "type": "text(10)",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "DETAI_GVCNDT_GIAOVIEN_MAGV_fk": {
+          "name": "DETAI_GVCNDT_GIAOVIEN_MAGV_fk",
+          "tableFrom": "DETAI",
+          "tableTo": "GIAOVIEN",
+          "columnsFrom": [
+            "GVCNDT"
+          ],
+          "columnsTo": [
+            "MAGV"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "DETAI_MACD_CHUDE_MACD_fk": {
+          "name": "DETAI_MACD_CHUDE_MACD_fk",
+          "tableFrom": "DETAI",
+          "tableTo": "CHUDE",
+          "columnsFrom": [
+            "MACD"
+          ],
+          "columnsTo": [
+            "MACD"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "checkConstraints": {}
+    },
+    "GIAOVIEN": {
+      "name": "GIAOVIEN",
+      "columns": {
+        "MAGV": {
+          "name": "MAGV",
+          "type": "text(10)",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "HOTEN": {
+          "name": "HOTEN",
+          "type": "text(50)",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "LUONG": {
+          "name": "LUONG",
+          "type": "real",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false,
+          "default": 1000
+        },
+        "PHAI": {
+          "name": "PHAI",
+          "type": "text(3)",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "NGSINH": {
+          "name": "NGSINH",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "DIACHI": {
+          "name": "DIACHI",
+          "type": "text(50)",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "GVQLCM": {
+          "name": "GVQLCM",
+          "type": "text(10)",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "MABM": {
+          "name": "MABM",
+          "type": "text(10)",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "GIAOVIEN_GVQLCM_GIAOVIEN_MAGV_fk": {
+          "name": "GIAOVIEN_GVQLCM_GIAOVIEN_MAGV_fk",
+          "tableFrom": "GIAOVIEN",
+          "tableTo": "GIAOVIEN",
+          "columnsFrom": [
+            "GVQLCM"
+          ],
+          "columnsTo": [
+            "MAGV"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "checkConstraints": {}
+    },
+    "GV_DT": {
+      "name": "GV_DT",
+      "columns": {
+        "MAGV": {
+          "name": "MAGV",
+          "type": "text(10)",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "DIENTHOAI": {
+          "name": "DIENTHOAI",
+          "type": "text(10)",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "GV_DT_MAGV_GIAOVIEN_MAGV_fk": {
+          "name": "GV_DT_MAGV_GIAOVIEN_MAGV_fk",
+          "tableFrom": "GV_DT",
+          "tableTo": "GIAOVIEN",
+          "columnsFrom": [
+            "MAGV"
+          ],
+          "columnsTo": [
+            "MAGV"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {
+        "GV_DT_MAGV_DIENTHOAI_pk": {
+          "columns": [
+            "MAGV",
+            "DIENTHOAI"
+          ],
+          "name": "GV_DT_MAGV_DIENTHOAI_pk"
+        }
+      },
+      "uniqueConstraints": {},
+      "checkConstraints": {}
+    },
+    "KHOA": {
+      "name": "KHOA",
+      "columns": {
+        "MAKHOA": {
+          "name": "MAKHOA",
+          "type": "text(10)",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "TENKHOA": {
+          "name": "TENKHOA",
+          "type": "text(50)",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "NAMTL": {
+          "name": "NAMTL",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "PHONG": {
+          "name": "PHONG",
+          "type": "text(3)",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "DIENTHOAI": {
+          "name": "DIENTHOAI",
+          "type": "text(10)",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "TRUONGKHOA": {
+          "name": "TRUONGKHOA",
+          "type": "text(10)",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "NGAYNHANCHUC": {
+          "name": "NGAYNHANCHUC",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "KHOA_TRUONGKHOA_GIAOVIEN_MAGV_fk": {
+          "name": "KHOA_TRUONGKHOA_GIAOVIEN_MAGV_fk",
+          "tableFrom": "KHOA",
+          "tableTo": "GIAOVIEN",
+          "columnsFrom": [
+            "TRUONGKHOA"
+          ],
+          "columnsTo": [
+            "MAGV"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "checkConstraints": {}
+    },
+    "NGUOITHAN": {
+      "name": "NGUOITHAN",
+      "columns": {
+        "MAGV": {
+          "name": "MAGV",
+          "type": "text(10)",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "TEN": {
+          "name": "TEN",
+          "type": "text(50)",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "NGSINH": {
+          "name": "NGSINH",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "PHAI": {
+          "name": "PHAI",
+          "type": "text(3)",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "NGUOITHAN_MAGV_GIAOVIEN_MAGV_fk": {
+          "name": "NGUOITHAN_MAGV_GIAOVIEN_MAGV_fk",
+          "tableFrom": "NGUOITHAN",
+          "tableTo": "GIAOVIEN",
+          "columnsFrom": [
+            "MAGV"
+          ],
+          "columnsTo": [
+            "MAGV"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {
+        "NGUOITHAN_MAGV_TEN_pk": {
+          "columns": [
+            "MAGV",
+            "TEN"
+          ],
+          "name": "NGUOITHAN_MAGV_TEN_pk"
+        }
+      },
+      "uniqueConstraints": {},
+      "checkConstraints": {}
+    },
+    "THAMGIADT": {
+      "name": "THAMGIADT",
+      "columns": {
+        "MAGV": {
+          "name": "MAGV",
+          "type": "text(10)",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "MADT": {
+          "name": "MADT",
+          "type": "text(10)",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "STT": {
+          "name": "STT",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "PHUCAP": {
+          "name": "PHUCAP",
+          "type": "real",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "KETQUA": {
+          "name": "KETQUA",
+          "type": "text(10)",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "THAMGIADT_MAGV_GIAOVIEN_MAGV_fk": {
+          "name": "THAMGIADT_MAGV_GIAOVIEN_MAGV_fk",
+          "tableFrom": "THAMGIADT",
+          "tableTo": "GIAOVIEN",
+          "columnsFrom": [
+            "MAGV"
+          ],
+          "columnsTo": [
+            "MAGV"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "THAMGIADT_MADT_STT_CONGVIEC_MADT_SOTT_fk": {
+          "name": "THAMGIADT_MADT_STT_CONGVIEC_MADT_SOTT_fk",
+          "tableFrom": "THAMGIADT",
+          "tableTo": "CONGVIEC",
+          "columnsFrom": [
+            "MADT",
+            "STT"
+          ],
+          "columnsTo": [
+            "MADT",
+            "SOTT"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {
+        "THAMGIADT_MAGV_MADT_STT_pk": {
+          "columns": [
+            "MAGV",
+            "MADT",
+            "STT"
+          ],
+          "name": "THAMGIADT_MAGV_MADT_STT_pk"
+        }
+      },
+      "uniqueConstraints": {},
+      "checkConstraints": {}
+    }
+  },
+  "views": {},
+  "enums": {},
+  "_meta": {
+    "schemas": {},
+    "tables": {},
+    "columns": {}
+  },
+  "internal": {
+    "indexes": {}
+  }
+}
