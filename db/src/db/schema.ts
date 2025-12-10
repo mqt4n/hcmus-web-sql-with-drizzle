@@ -33,6 +33,7 @@ export const nguoiThan = sqliteTable(
   (table) => {
     return {
       pk: primaryKey({ columns: [table.magv, table.ten] }),
+      checkPhai: check('check_phai_nguoithan', sql`${table.phai} IN ('Nam', 'Nữ')`),
     };
   }
 );

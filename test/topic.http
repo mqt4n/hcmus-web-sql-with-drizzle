@@ -1,0 +1,64 @@
+### Variables
+@baseUrl = http://localhost:4000
+@apiUrl = {{baseUrl}}/api
+
+### Get all topics
+GET {{apiUrl}}/topics
+Content-Type: application/json
+
+###
+
+### Get topic by ID
+GET {{apiUrl}}/topics/NCPT
+Content-Type: application/json
+
+###
+
+### Get topic by ID (Not Found)
+GET {{apiUrl}}/topics/XXX
+Content-Type: application/json
+
+###
+
+### Create new topic
+POST {{apiUrl}}/topics
+Content-Type: application/json
+
+{
+  "macd": "AI",
+  "tenCd": "Trí tuệ nhân tạo"
+}
+
+###
+
+### Update topic
+PUT {{apiUrl}}/topics/NCPT
+Content-Type: application/json
+
+{
+  "tenCd": "Nghiên cứu phát triển (Updated)"
+}
+
+###
+
+### Update topic (Not Found)
+PUT {{apiUrl}}/topics/XXX
+Content-Type: application/json
+
+{
+  "tenCd": "Test Update"
+}
+
+###
+
+### Delete topic
+DELETE {{apiUrl}}/topics/AI
+Content-Type: application/json
+
+###
+
+### Delete topic (Not Found)
+DELETE {{apiUrl}}/topics/XXX
+Content-Type: application/json
+
+###
