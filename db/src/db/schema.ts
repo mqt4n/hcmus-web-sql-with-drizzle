@@ -1,21 +1,31 @@
-import { sqliteTable, text, real, integer, primaryKey } from 'drizzle-orm/sqlite-core';
-import { relations } from 'drizzle-orm';
+import { sqliteTable, text, real, integer, primaryKey, check, AnySQLiteColumn } from 'drizzle-orm/sqlite-core';
+import { relations, sql } from 'drizzle-orm';
 
-export const giaoVien = sqliteTable('GIAOVIEN', {
-  magv: text('MAGV', { length: 10 }).notNull().primaryKey(),
-  hoTen: text('HOTEN', { length: 50 }).notNull(),
-  luong: real('LUONG').default(1000),
-  phai: text('PHAI', { length: 3 }).notNull(),
-  ngSinh: text('NGSINH'),
-  diaChi: text('DIACHI', { length: 50 }),
-  gvqlcm: text('GVQLCM', { length: 10 }),
-  mabm: text('MABM', { length: 10 }),
-});
+export const giaoVien = sqliteTable(
+  'GIAOVIEN',
+  {
+    magv: text('MAGV', { length: 10 }).notNull().primaryKey(),
+    hoTen: text('HOTEN', { length: 50 }).notNull(),
+    luong: real('LUONG').default(1000),
+    phai: text('PHAI', { length: 3 }).notNull(),
+    ngSinh: text('NGSINH'),
+    diaChi: text('DIACHI', { length: 50 }),
+    gvqlcm: text('GVQLCM', { length: 10 }).references((): AnySQLiteColumn => giaoVien.magv, { onDelete: 'set null' }),
+    mabm: text('MABM', { length: 10 }).references((): AnySQLiteColumn => boMon.mabm, { onDelete: 'set null' }),
+  },
+  (table) => {
+    return {
+      checkPhai: check('check_phai_giaovien', sql`${table.phai} IN ('Nam', 'Nữ')`),
+    };
+  }
+);
 
 export const nguoiThan = sqliteTable(
   'NGUOITHAN',
   {
-    magv: text('MAGV', { length: 10 }).notNull(),
+    magv: text('MAGV', { length: 10 })
+      .notNull()
+      .references(() => giaoVien.magv, { onDelete: 'cascade' }),
     ten: text('TEN', { length: 50 }).notNull(),
     ngSinh: text('NGSINH'),
     phai: text('PHAI', { length: 3 }).notNull(),
@@ -33,7 +43,9 @@ export const khoa = sqliteTable('KHOA', {
   namTl: integer('NAMTL'),
   phong: text('PHONG', { length: 3 }),
   dienThoai: text('DIENTHOAI', { length: 10 }),
-  truongKhoa: text('TRUONGKHOA', { length: 10 }),
+  truongKhoa: text('TRUONGKHOA', { length: 10 }).references((): AnySQLiteColumn => giaoVien.magv, {
+    onDelete: 'set null',
+  }),
   ngayNhanChuc: text('NGAYNHANCHUC'),
 });
 
@@ -42,15 +54,17 @@ export const boMon = sqliteTable('BOMON', {
   tenBm: text('TENBM', { length: 50 }),
   phong: text('PHONG', { length: 10 }),
   dienThoai: text('DIENTHOAI', { length: 10 }),
-  truongBm: text('TRUONGBM', { length: 10 }),
-  maKhoa: text('MAKHOA', { length: 10 }),
+  truongBm: text('TRUONGBM', { length: 10 }).references((): AnySQLiteColumn => giaoVien.magv, { onDelete: 'set null' }),
+  maKhoa: text('MAKHOA', { length: 10 }).references(() => khoa.maKhoa, { onDelete: 'set null' }),
   ngayNhanChuc: text('NGAYNHANCHUC'),
 });
 
 export const gvDt = sqliteTable(
   'GV_DT',
   {
-    magv: text('MAGV', { length: 10 }).notNull(),
+    magv: text('MAGV', { length: 10 })
+      .notNull()
+      .references(() => giaoVien.magv, { onDelete: 'cascade' }),
     dienThoai: text('DIENTHOAI', { length: 10 }).notNull(),
   },
   (table) => {
@@ -72,14 +86,16 @@ export const deTai = sqliteTable('DETAI', {
   kinhPhi: real('KINHPHI'),
   ngayBd: text('NGAYBD'),
   ngayKt: text('NGAYKT'),
-  macd: text('MACD', { length: 10 }),
-  gvcnDt: text('GVCNDT', { length: 10 }),
+  macd: text('MACD', { length: 10 }).references(() => chuDe.macd, { onDelete: 'set null' }),
+  gvcnDt: text('GVCNDT', { length: 10 }).references(() => giaoVien.magv, { onDelete: 'set null' }),
 });
 
 export const congViec = sqliteTable(
   'CONGVIEC',
   {
-    madt: text('MADT', { length: 10 }).notNull(),
+    madt: text('MADT', { length: 10 })
+      .notNull()
+      .references(() => deTai.madt, { onDelete: 'cascade' }),
     sott: integer('SOTT').notNull(),
     tenCv: text('TENCV', { length: 50 }),
     ngayBd: text('NGAYBD'),
@@ -95,8 +111,12 @@ export const congViec = sqliteTable(
 export const thamGiaDt = sqliteTable(
   'THAMGIADT',
   {
-    magv: text('MAGV', { length: 10 }).notNull(),
-    madt: text('MADT', { length: 10 }).notNull(),
+    magv: text('MAGV', { length: 10 })
+      .notNull()
+      .references(() => giaoVien.magv, { onDelete: 'cascade' }),
+    madt: text('MADT', { length: 10 })
+      .notNull()
+      .references(() => deTai.madt, { onDelete: 'cascade' }),
     stt: integer('STT').notNull(),
     phuCap: real('PHUCAP'),
     ketQua: text('KETQUA', { length: 10 }),
@@ -205,9 +225,7 @@ export const gvDtRelations = relations(gvDt, ({ one }) => ({
 }));
 
 // --- KIỂU CHO GIAOVIEN ---
-/** Kiểu dữ liệu trả về khi SELECT từ bảng GIAOVIEN */
 export type GiaoVienSelect = typeof giaoVien.$inferSelect;
-/** Kiểu dữ liệu dùng để INSERT vào bảng GIAOVIEN */
 export type GiaoVienInsert = typeof giaoVien.$inferInsert;
 
 // --- KIỂU CHO NGUOITHAN ---
