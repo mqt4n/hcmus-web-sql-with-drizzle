@@ -1,0 +1,41 @@
+### Variables
+@baseUrl = http://localhost:5000
+@apiUrl = {{baseUrl}}/api
+
+
+### 1. Dashboard Statistics (Main Feature)
+# Thống kê theo bộ môn với:
+# - count() - Đếm số lượng giáo viên
+# - sum() - Tổng quỹ lương
+# - avg() - Lương trung bình
+# - min() - Lương thấp nhất
+# - max() - Lương cao nhất
+# - groupBy() - Nhóm theo bộ môn
+# - having() - Lọc bộ môn có giáo viên
+# - orderBy() - Sắp xếp theo tổng lương
+GET {{apiUrl}}/stats/dashboard
+Content-Type: application/json
+
+### 2. Overall System Statistics
+# Tổng quan: Số GV, số đề tài, số bộ môn, tổng lương
+GET {{apiUrl}}/stats/overall
+Content-Type: application/json
+
+### 3. Teachers Statistics by Gender
+# Thống kê giáo viên theo giới tính (groupBy phai)
+GET {{apiUrl}}/stats/teachers/gender
+Content-Type: application/json
+
+### 4. Top Teachers by Salary
+# Top 10 giáo viên lương cao nhất (orderBy + limit)
+GET {{apiUrl}}/stats/teachers/top
+Content-Type: application/json
+
+### 5. Top 5 Teachers by Salary (Custom limit)
+GET {{apiUrl}}/stats/teachers/top?limit=5
+Content-Type: application/json
+
+### 6. Projects Statistics by Topic
+# Thống kê đề tài theo chủ đề (groupBy + aggregation)
+GET {{apiUrl}}/stats/projects/topics
+Content-Type: application/json
