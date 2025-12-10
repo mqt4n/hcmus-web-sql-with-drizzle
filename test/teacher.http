@@ -1,0 +1,76 @@
+### Variables
+@baseUrl = http://localhost:4000
+@apiUrl = {{baseUrl}}/api
+
+### Get all teachers
+GET {{apiUrl}}/teachers
+Content-Type: application/json
+
+###
+
+### Get teacher by ID
+GET {{apiUrl}}/teachers/001
+Content-Type: application/json
+
+###
+
+### Get teacher by ID (Not Found)
+GET {{apiUrl}}/teachers/999
+Content-Type: application/json
+
+###
+
+### Create new teacher
+POST {{apiUrl}}/teachers
+Content-Type: application/json
+
+{
+  "magv": "011",
+  "hoTen": "Lê Văn Nam",
+  "luong": 2200,
+  "phai": "Nam",
+  "ngSinh": "1985-05-15",
+  "diaChi": "50 Nguyễn Thị Minh Khai, Q.3, TP HCM",
+  "mabm": "HTTT"
+}
+
+###
+
+### Update teacher
+PUT {{apiUrl}}/teachers/001
+Content-Type: application/json
+
+{
+  "luong": 2500,
+  "diaChi": "25/3 Lạc Long Quân, Q.10, TP HCM (Updated)"
+}
+
+###
+
+### Update teacher (Not Found)
+PUT {{apiUrl}}/teachers/999
+Content-Type: application/json
+
+{
+  "luong": 3000
+}
+
+###
+
+### Delete teacher
+DELETE {{apiUrl}}/teachers/011
+Content-Type: application/json
+
+###
+
+### Delete teacher (Not Found)
+DELETE {{apiUrl}}/teachers/999
+Content-Type: application/json
+
+###
+
+### Get teachers by department
+GET {{apiUrl}}/teachers/department/HTTT
+Content-Type: application/json
+
+###
