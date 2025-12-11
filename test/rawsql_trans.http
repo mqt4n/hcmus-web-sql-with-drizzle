@@ -1,0 +1,92 @@
+### RawSQL & Transaction API Endpoints
+
+
+@baseUrl = http://localhost:4000
+@apiUrl = {{baseUrl}}/api/rawsql-trans
+
+###############################################
+# 1. RAW SQL DEMO
+# Lấy danh sách giáo viên có lương cao hơn mức cho trước
+###############################################
+
+### Danh sách giáo viên có lương cao hơn 2000
+GET {{apiUrl}}/high-earners?minSalary=2000
+
+###############################################
+# 2. MIXED QUERY DEMO  
+# Kết hợp Raw SQL và Query Builder
+###############################################
+
+### Danh sách giáo viên sinh trước năm 1975
+GET {{apiUrl}}/born-before/1975
+
+###############################################
+# 3. TRANSACTION DEMO
+# Chuyển lương giữa 2 giáo viên với transaction
+###############################################
+
+### Chuyển 500 lương từ giáo viên "002" sang "001"
+POST {{apiUrl}}/transfer
+Content-Type: application/json
+
+{
+  "fromTeacherId": "002",
+  "toTeacherId": "001",
+  "amount": 500
+}
+
+###############################################
+# Transaction Rollback Demo
+###############################################
+POST {{apiUrl}}/transfer-rollback-test
+Content-Type: application/json
+
+{
+  "fromTeacherId": "002",
+  "toTeacherId": "001",
+  "amount": 500
+}
+
+
+###############################################
+# Các trường hợp lỗi - Transaction Demo
+###############################################
+
+### Lỗi: Lương không đủ (insufficient salary)
+POST {{apiUrl}}/transfer
+Content-Type: application/json
+
+{
+  "fromTeacherId": "001",
+  "toTeacherId": "002",
+  "amount": 999999
+}
+
+### Lỗi: Chuyển lương cho chính mình (same teacher)
+POST {{apiUrl}}/transfer
+Content-Type: application/json
+
+{
+  "fromTeacherId": "001",
+  "toTeacherId": "001",
+  "amount": 100
+}
+
+### Lỗi: Giáo viên không tồn tại (teacher not found)
+POST {{apiUrl}}/transfer
+Content-Type: application/json
+
+{
+  "fromTeacherId": "999",
+  "toTeacherId": "001",
+  "amount": 100
+}
+
+### Lỗi: Thiếu tham số (missing parameters)
+POST {{apiUrl}}/transfer
+Content-Type: application/json
+
+{
+  "fromTeacherId": "001",
+  "amount": 100
+}
