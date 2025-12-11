@@ -1,5 +1,4 @@
-import { db, schema } from '../db';
-import { eq, gt, desc, sql } from 'drizzle-orm';
+import { db, schema, eq, gt, desc, sql } from '../db';
 
 export class StatsService {
   async getDashboardStats() {
@@ -23,7 +22,6 @@ export class StatsService {
 
     return result;
   }
-
 
   async getOverallStats() {
     const totalTeachers = await db
