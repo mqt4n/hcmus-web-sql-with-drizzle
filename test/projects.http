@@ -2,6 +2,80 @@
 @baseUrl = http://localhost:4000
 @apiUrl = {{baseUrl}}/api
 
+### Get all projects
+GET {{apiUrl}}/projects
+Content-Type: application/json
+
+###
+
+### Get project by ID
+GET {{apiUrl}}/projects/001
+Content-Type: application/json
+
+###
+
+### Get project by ID (Not Found)
+GET {{apiUrl}}/projects/XXX
+Content-Type: application/json
+
+###
+
+### Create new project
+POST {{apiUrl}}/projects
+Content-Type: application/json
+
+{
+  "madt": "008",
+  "tenDt": "Hệ thống quản lý học tập trực tuyến",
+  "capQl": "Trường",
+  "kinhPhi": 50000,
+  "ngayBd": "2024-01-01",
+  "ngayKt": "2024-12-31",
+  "macd": "ƯDCN",
+  "gvcnDt": "002"
+}
+
+###
+
+### Update project
+PUT {{apiUrl}}/projects/001
+Content-Type: application/json
+
+{
+  "kinhPhi": 300000,
+  "ngayKt": "2025-12-31"
+}
+
+###
+
+### Update project (Not Found)
+PUT {{apiUrl}}/projects/XXX
+Content-Type: application/json
+
+{
+  "kinhPhi": 100000
+}
+
+###
+
+### Delete project
+DELETE {{apiUrl}}/projects/008
+Content-Type: application/json
+
+###
+
+### Delete project (Not Found)
+DELETE {{apiUrl}}/projects/XXX
+Content-Type: application/json
+
+###
+
+### Get projects by topic
+GET {{apiUrl}}/projects/topic/ƯDCN
+Content-Type: application/json
+
+###
+
 ### 1. Get all projects - FLAT DATA (JOIN thủ công)
 # Trả về dữ liệu phẳng, mỗi row = 1 giáo viên tham gia
 # Phù hợp cho: Export CSV, báo cáo, pivot table
