@@ -1,5 +1,4 @@
-import { db, schema } from '../db';
-import { eq } from 'drizzle-orm';
+import { db, schema, eq } from '../db';
 
 export class ProjectsService {
   async getFlatProjects() {

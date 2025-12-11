@@ -1,5 +1,5 @@
 ### Variables
-@baseUrl = http://localhost:5000
+@baseUrl = http://localhost:4000
 @apiUrl = {{baseUrl}}/api
 
 ### 1. Get all projects - FLAT DATA (JOIN thủ công)
@@ -19,5 +19,5 @@ Content-Type: application/json
 ###
 
 ### 3. Get single project by ID - NESTED DATA
-GET {{apiUrl}}/projects/DT01
+GET {{apiUrl}}/projects/001
 Content-Type: application/json

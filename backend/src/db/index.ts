@@ -12,8 +12,7 @@ const dbPath = isDev
   ? path.resolve(__dirname, '../../..', 'db', 'src', 'db', 'sqlite.db') // dev: from backend/src/db -> up 3 to project root
   : path.resolve(__dirname, '../..', 'db', 'src', 'db', 'sqlite.db'); // prod: from backend/dist -> up 2 to project root
 
-const sqlite = new Database(dbPath);
-export const db = drizzle(sqlite, { schema });
+const db = drizzle({ client: new Database(dbPath), schema });
 
-// Re-export schema
-export { schema };
+export * from 'drizzle-orm';
+export { db, schema };

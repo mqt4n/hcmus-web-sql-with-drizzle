@@ -1,9 +1,9 @@
 import { defineConfig } from 'tsup';
 
 export default defineConfig({
-  entry: ['server.ts', 'src/**/*.ts'],
-  format: ['cjs'],
-  dts: false, // Disable DTS to avoid issues with external schema files
+  entry: ['server.ts'],
+  format: ['cjs', 'esm'],
+  dts: false,
   splitting: false,
   sourcemap: true,
   clean: true,
