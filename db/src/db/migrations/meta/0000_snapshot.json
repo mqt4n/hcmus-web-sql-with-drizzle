@@ -1,7 +1,7 @@
 {
   "version": "6",
   "dialect": "sqlite",
-  "id": "4d3b88cb-b8a4-467e-b1f6-d3b0ad043df3",
+  "id": "43685fd0-1c26-4700-b424-17381c37e833",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "tables": {
     "BOMON": {
@@ -58,7 +58,34 @@
         }
       },
       "indexes": {},
-      "foreignKeys": {},
+      "foreignKeys": {
+        "BOMON_TRUONGBM_GIAOVIEN_MAGV_fk": {
+          "name": "BOMON_TRUONGBM_GIAOVIEN_MAGV_fk",
+          "tableFrom": "BOMON",
+          "tableTo": "GIAOVIEN",
+          "columnsFrom": [
+            "TRUONGBM"
+          ],
+          "columnsTo": [
+            "MAGV"
+          ],
+          "onDelete": "set null",
+          "onUpdate": "no action"
+        },
+        "BOMON_MAKHOA_KHOA_MAKHOA_fk": {
+          "name": "BOMON_MAKHOA_KHOA_MAKHOA_fk",
+          "tableFrom": "BOMON",
+          "tableTo": "KHOA",
+          "columnsFrom": [
+            "MAKHOA"
+          ],
+          "columnsTo": [
+            "MAKHOA"
+          ],
+          "onDelete": "set null",
+          "onUpdate": "no action"
+        }
+      },
       "compositePrimaryKeys": {},
       "uniqueConstraints": {},
       "checkConstraints": {}
@@ -127,7 +154,21 @@
         }
       },
       "indexes": {},
-      "foreignKeys": {},
+      "foreignKeys": {
+        "CONGVIEC_MADT_DETAI_MADT_fk": {
+          "name": "CONGVIEC_MADT_DETAI_MADT_fk",
+          "tableFrom": "CONGVIEC",
+          "tableTo": "DETAI",
+          "columnsFrom": [
+            "MADT"
+          ],
+          "columnsTo": [
+            "MADT"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
       "compositePrimaryKeys": {
         "CONGVIEC_MADT_SOTT_pk": {
           "columns": [
@@ -201,7 +242,34 @@
         }
       },
       "indexes": {},
-      "foreignKeys": {},
+      "foreignKeys": {
+        "DETAI_MACD_CHUDE_MACD_fk": {
+          "name": "DETAI_MACD_CHUDE_MACD_fk",
+          "tableFrom": "DETAI",
+          "tableTo": "CHUDE",
+          "columnsFrom": [
+            "MACD"
+          ],
+          "columnsTo": [
+            "MACD"
+          ],
+          "onDelete": "set null",
+          "onUpdate": "no action"
+        },
+        "DETAI_GVCNDT_GIAOVIEN_MAGV_fk": {
+          "name": "DETAI_GVCNDT_GIAOVIEN_MAGV_fk",
+          "tableFrom": "DETAI",
+          "tableTo": "GIAOVIEN",
+          "columnsFrom": [
+            "GVCNDT"
+          ],
+          "columnsTo": [
+            "MAGV"
+          ],
+          "onDelete": "set null",
+          "onUpdate": "no action"
+        }
+      },
       "compositePrimaryKeys": {},
       "uniqueConstraints": {},
       "checkConstraints": {}
@@ -268,10 +336,42 @@
         }
       },
       "indexes": {},
-      "foreignKeys": {},
+      "foreignKeys": {
+        "GIAOVIEN_GVQLCM_GIAOVIEN_MAGV_fk": {
+          "name": "GIAOVIEN_GVQLCM_GIAOVIEN_MAGV_fk",
+          "tableFrom": "GIAOVIEN",
+          "tableTo": "GIAOVIEN",
+          "columnsFrom": [
+            "GVQLCM"
+          ],
+          "columnsTo": [
+            "MAGV"
+          ],
+          "onDelete": "set null",
+          "onUpdate": "no action"
+        },
+        "GIAOVIEN_MABM_BOMON_MABM_fk": {
+          "name": "GIAOVIEN_MABM_BOMON_MABM_fk",
+          "tableFrom": "GIAOVIEN",
+          "tableTo": "BOMON",
+          "columnsFrom": [
+            "MABM"
+          ],
+          "columnsTo": [
+            "MABM"
+          ],
+          "onDelete": "set null",
+          "onUpdate": "no action"
+        }
+      },
       "compositePrimaryKeys": {},
       "uniqueConstraints": {},
-      "checkConstraints": {}
+      "checkConstraints": {
+        "check_phai_giaovien": {
+          "name": "check_phai_giaovien",
+          "value": "\"GIAOVIEN\".\"PHAI\" IN ('Nam', 'Nữ')"
+        }
+      }
     },
     "GV_DT": {
       "name": "GV_DT",
@@ -292,7 +392,21 @@
         }
       },
       "indexes": {},
-      "foreignKeys": {},
+      "foreignKeys": {
+        "GV_DT_MAGV_GIAOVIEN_MAGV_fk": {
+          "name": "GV_DT_MAGV_GIAOVIEN_MAGV_fk",
+          "tableFrom": "GV_DT",
+          "tableTo": "GIAOVIEN",
+          "columnsFrom": [
+            "MAGV"
+          ],
+          "columnsTo": [
+            "MAGV"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
       "compositePrimaryKeys": {
         "GV_DT_MAGV_DIENTHOAI_pk": {
           "columns": [
@@ -359,7 +473,21 @@
         }
       },
       "indexes": {},
-      "foreignKeys": {},
+      "foreignKeys": {
+        "KHOA_TRUONGKHOA_GIAOVIEN_MAGV_fk": {
+          "name": "KHOA_TRUONGKHOA_GIAOVIEN_MAGV_fk",
+          "tableFrom": "KHOA",
+          "tableTo": "GIAOVIEN",
+          "columnsFrom": [
+            "TRUONGKHOA"
+          ],
+          "columnsTo": [
+            "MAGV"
+          ],
+          "onDelete": "set null",
+          "onUpdate": "no action"
+        }
+      },
       "compositePrimaryKeys": {},
       "uniqueConstraints": {},
       "checkConstraints": {}
@@ -397,7 +525,21 @@
         }
       },
       "indexes": {},
-      "foreignKeys": {},
+      "foreignKeys": {
+        "NGUOITHAN_MAGV_GIAOVIEN_MAGV_fk": {
+          "name": "NGUOITHAN_MAGV_GIAOVIEN_MAGV_fk",
+          "tableFrom": "NGUOITHAN",
+          "tableTo": "GIAOVIEN",
+          "columnsFrom": [
+            "MAGV"
+          ],
+          "columnsTo": [
+            "MAGV"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
       "compositePrimaryKeys": {
         "NGUOITHAN_MAGV_TEN_pk": {
           "columns": [
@@ -450,7 +592,34 @@
         }
       },
       "indexes": {},
-      "foreignKeys": {},
+      "foreignKeys": {
+        "THAMGIADT_MAGV_GIAOVIEN_MAGV_fk": {
+          "name": "THAMGIADT_MAGV_GIAOVIEN_MAGV_fk",
+          "tableFrom": "THAMGIADT",
+          "tableTo": "GIAOVIEN",
+          "columnsFrom": [
+            "MAGV"
+          ],
+          "columnsTo": [
+            "MAGV"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "THAMGIADT_MADT_DETAI_MADT_fk": {
+          "name": "THAMGIADT_MADT_DETAI_MADT_fk",
+          "tableFrom": "THAMGIADT",
+          "tableTo": "DETAI",
+          "columnsFrom": [
+            "MADT"
+          ],
+          "columnsTo": [
+            "MADT"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
       "compositePrimaryKeys": {
         "THAMGIADT_MAGV_MADT_STT_pk": {
           "columns": [

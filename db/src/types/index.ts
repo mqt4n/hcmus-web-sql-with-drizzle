@@ -6,3 +6,4 @@ export * from './chuDe';
 export * from './deTai';
 export * from './thamGiaDt';
 export * from './congViec';
+export * from './gvDt';
