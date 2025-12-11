@@ -26,7 +26,12 @@ export const nguoiThan = sqliteTable(
     ngSinh: text('NGSINH'),
     phai: text('PHAI', { length: 3 }).notNull(),
   },
-  (table) => [primaryKey({ columns: [table.magv, table.ten] })]
+  (table) => {
+    return {
+      pk: primaryKey({ columns: [table.magv, table.ten] }),
+      checkPhai: check('check_phai_nguoithan', sql`${table.phai} IN ('Nam', 'Nữ')`),
+    };
+  }
 );
 
 export const khoa = sqliteTable('KHOA', {
