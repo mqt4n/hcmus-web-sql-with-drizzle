@@ -1,8 +1,19 @@
 import { db } from '../index';
+import {
+  BoMonInsert,
+  ChuDeInsert,
+  CongViecInsert,
+  DeTaiInsert,
+  GiaoVienInsert,
+  KhoaInsert,
+  NguoiThanInsert,
+  ThamGiaDtInsert,
+  GvDtInsert,
+} from '../types';
 import * as schema from './schema';
 import { eq } from 'drizzle-orm';
 
-const giaoVienData: schema.GiaoVienInsert[] = [
+const giaoVienData: GiaoVienInsert[] = [
   {
     magv: '001',
     hoTen: 'Nguyễn Hoài An',
@@ -85,7 +96,7 @@ const giaoVienData: schema.GiaoVienInsert[] = [
   },
 ];
 
-const khoaData: schema.KhoaInsert[] = [
+const khoaData: KhoaInsert[] = [
   {
     maKhoa: 'CNTT',
     tenKhoa: 'Công nghệ thông tin',
@@ -124,7 +135,7 @@ const khoaData: schema.KhoaInsert[] = [
   },
 ];
 
-const boMonData: schema.BoMonInsert[] = [
+const boMonData: BoMonInsert[] = [
   {
     mabm: 'CNTT',
     tenBm: 'Công nghệ tri thức',
@@ -217,13 +228,13 @@ const boMonData: schema.BoMonInsert[] = [
   },
 ];
 
-const chuDeData: schema.ChuDeInsert[] = [
+const chuDeData: ChuDeInsert[] = [
   { macd: 'NCPT', tenCd: 'Nghiên cứu phát triển' },
   { macd: 'QLGD', tenCd: 'Quản lý giáo dục' },
   { macd: 'ƯDCN', tenCd: 'Ứng dụng công nghệ' },
 ];
 
-const deTaiData: schema.DeTaiInsert[] = [
+const deTaiData: DeTaiInsert[] = [
   {
     madt: '001',
     tenDt: 'HTTT quản lý các trường ĐH',
@@ -296,7 +307,7 @@ const deTaiData: schema.DeTaiInsert[] = [
   },
 ];
 
-const congViecData: schema.CongViecInsert[] = [
+const congViecData: CongViecInsert[] = [
   { madt: '001', sott: 1, tenCv: 'Khởi tạo và Lập kế hoạch', ngayBd: '2007-10-20', ngayKt: '2008-12-20' },
   { madt: '001', sott: 2, tenCv: 'Xác định yêu cầu', ngayBd: '2008-12-21', ngayKt: '2008-03-21' },
   { madt: '001', sott: 3, tenCv: 'Phân tích hệ thống', ngayBd: '2008-03-22', ngayKt: '2008-05-22' },
@@ -311,7 +322,7 @@ const congViecData: schema.CongViecInsert[] = [
   { madt: '006', sott: 2, tenCv: 'Nuôi cấy', ngayBd: '2007-02-21', ngayKt: '2008-08-21' },
 ];
 
-const thamGiaDtData: schema.ThamGiaDtInsert[] = [
+const thamGiaDtData: ThamGiaDtInsert[] = [
   { magv: '001', madt: '002', stt: 1, phuCap: 0, ketQua: null },
   { magv: '001', madt: '002', stt: 2, phuCap: 2, ketQua: null },
   { magv: '002', madt: '001', stt: 4, phuCap: 2, ketQua: 'Đạt' },
@@ -326,7 +337,7 @@ const thamGiaDtData: schema.ThamGiaDtInsert[] = [
   { magv: '009', madt: '002', stt: 4, phuCap: 1.5, ketQua: null },
 ];
 
-const nguoiThanData: schema.NguoiThanInsert[] = [
+const nguoiThanData: NguoiThanInsert[] = [
   { magv: '001', ten: 'Hùng', ngSinh: '1990-01-14', phai: 'Nam' },
   { magv: '001', ten: 'Thủy', ngSinh: '1994-12-08', phai: 'Nữ' },
   { magv: '003', ten: 'Hà', ngSinh: '1998-09-03', phai: 'Nữ' },
@@ -338,7 +349,7 @@ const nguoiThanData: schema.NguoiThanInsert[] = [
   { magv: '010', ten: 'Nguyệt', ngSinh: '2006-01-14', phai: 'Nữ' },
 ];
 
-const gvDtData: schema.GvDtInsert[] = [
+const gvDtData: GvDtInsert[] = [
   { magv: '001', dienThoai: '0838912112' },
   { magv: '001', dienThoai: '0903123123' },
   { magv: '002', dienThoai: '0913454545' },
@@ -374,25 +385,26 @@ async function seed() {
     await db.delete(schema.boMon).execute();
     await db.delete(schema.khoa).execute();
     await db.delete(schema.giaoVien).execute();
-  } catch (error) {
-    // Tables might not exist yet, continue with insert
-  }
 
-  await db.insert(schema.giaoVien).values(giaoVienData).execute();
-  await db.insert(schema.khoa).values(khoaData).execute();
-  await db.insert(schema.boMon).values(boMonData).execute();
-  await db.insert(schema.chuDe).values(chuDeData).execute();
-  await db.insert(schema.deTai).values(deTaiData).execute();
-  await db.insert(schema.congViec).values(congViecData).execute();
-  await db.insert(schema.thamGiaDt).values(thamGiaDtData).execute();
-  await db.insert(schema.nguoiThan).values(nguoiThanData).execute();
-  await db.insert(schema.gvDt).values(gvDtData).execute();
-  for (const updateItem of giaoVienUpdateData) {
-    await db
-      .update(schema.giaoVien)
-      .set({ gvqlcm: updateItem.gvqlcm, mabm: updateItem.mabm })
-      .where(eq(schema.giaoVien.magv, updateItem.magv))
-      .execute();
+    await db.insert(schema.giaoVien).values(giaoVienData).execute();
+    await db.insert(schema.khoa).values(khoaData).execute();
+    await db.insert(schema.boMon).values(boMonData).execute();
+    await db.insert(schema.chuDe).values(chuDeData).execute();
+    await db.insert(schema.deTai).values(deTaiData).execute();
+    await db.insert(schema.congViec).values(congViecData).execute();
+    await db.insert(schema.thamGiaDt).values(thamGiaDtData).execute();
+    await db.insert(schema.nguoiThan).values(nguoiThanData).execute();
+    await db.insert(schema.gvDt).values(gvDtData).execute();
+
+    for (const updateItem of giaoVienUpdateData) {
+      await db
+        .update(schema.giaoVien)
+        .set({ gvqlcm: updateItem.gvqlcm, mabm: updateItem.mabm })
+        .where(eq(schema.giaoVien.magv, updateItem.magv))
+        .execute();
+    }
+  } catch (error) {
+    console.error('Error during seeding:', error);
   }
 }
 

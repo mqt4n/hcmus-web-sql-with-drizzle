@@ -1,0 +1,23 @@
+### Variables
+@baseUrl = http://localhost:4000
+@apiUrl = {{baseUrl}}/api
+
+### 1. Get all projects - FLAT DATA (JOIN thủ công)
+# Trả về dữ liệu phẳng, mỗi row = 1 giáo viên tham gia
+# Phù hợp cho: Export CSV, báo cáo, pivot table
+GET {{apiUrl}}/projects/flat
+Content-Type: application/json
+
+###
+
+### 2. Get all projects - NESTED DATA (Relational Queries)
+# Trả về JSON có cấu trúc lồng, mỗi đề tài chỉ xuất hiện 1 lần
+# Phù hợp cho: REST API, Web/Mobile App
+GET {{apiUrl}}/projects/nested
+Content-Type: application/json
+
+###
+
+### 3. Get single project by ID - NESTED DATA
+GET {{apiUrl}}/projects/001
+Content-Type: application/json

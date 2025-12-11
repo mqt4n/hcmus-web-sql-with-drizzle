@@ -13,11 +13,7 @@ export const giaoVien = sqliteTable(
     gvqlcm: text('GVQLCM', { length: 10 }).references((): AnySQLiteColumn => giaoVien.magv, { onDelete: 'set null' }),
     mabm: text('MABM', { length: 10 }).references((): AnySQLiteColumn => boMon.mabm, { onDelete: 'set null' }),
   },
-  (table) => {
-    return {
-      checkPhai: check('check_phai_giaovien', sql`${table.phai} IN ('Nam', 'Nữ')`),
-    };
-  }
+  (table) => [check('check_phai_giaovien', sql`${table.phai} IN ('Nam', 'Nữ')`)]
 );
 
 export const nguoiThan = sqliteTable(
@@ -68,11 +64,7 @@ export const gvDt = sqliteTable(
       .references(() => giaoVien.magv, { onDelete: 'cascade' }),
     dienThoai: text('DIENTHOAI', { length: 10 }).notNull(),
   },
-  (table) => {
-    return {
-      pk: primaryKey({ columns: [table.magv, table.dienThoai] }),
-    };
-  }
+  (table) => [primaryKey({ columns: [table.magv, table.dienThoai] })]
 );
 
 export const chuDe = sqliteTable('CHUDE', {
@@ -102,11 +94,7 @@ export const congViec = sqliteTable(
     ngayBd: text('NGAYBD'),
     ngayKt: text('NGAYKT'),
   },
-  (table) => {
-    return {
-      pk: primaryKey({ columns: [table.madt, table.sott] }),
-    };
-  }
+  (table) => [primaryKey({ columns: [table.madt, table.sott] })]
 );
 
 export const thamGiaDt = sqliteTable(
@@ -122,11 +110,7 @@ export const thamGiaDt = sqliteTable(
     phuCap: real('PHUCAP'),
     ketQua: text('KETQUA', { length: 10 }),
   },
-  (table) => {
-    return {
-      pk: primaryKey({ columns: [table.magv, table.madt, table.stt] }),
-    };
-  }
+  (table) => [primaryKey({ columns: [table.magv, table.madt, table.stt] })]
 );
 
 export const giaoVienRelations = relations(giaoVien, ({ one, many }) => ({
@@ -224,39 +208,3 @@ export const gvDtRelations = relations(gvDt, ({ one }) => ({
     references: [giaoVien.magv],
   }),
 }));
-
-// --- KIỂU CHO GIAOVIEN ---
-export type GiaoVienSelect = typeof giaoVien.$inferSelect;
-export type GiaoVienInsert = typeof giaoVien.$inferInsert;
-
-// --- KIỂU CHO NGUOITHAN ---
-export type NguoiThanSelect = typeof nguoiThan.$inferSelect;
-export type NguoiThanInsert = typeof nguoiThan.$inferInsert;
-
-// --- KIỂU CHO KHOA ---
-export type KhoaSelect = typeof khoa.$inferSelect;
-export type KhoaInsert = typeof khoa.$inferInsert;
-
-// --- KIỂU CHO BOMON ---
-export type BoMonSelect = typeof boMon.$inferSelect;
-export type BoMonInsert = typeof boMon.$inferInsert;
-
-// --- KIỂU CHO GV_DT ---
-export type GvDtSelect = typeof gvDt.$inferSelect;
-export type GvDtInsert = typeof gvDt.$inferInsert;
-
-// --- KIỂU CHO CHUDE ---
-export type ChuDeSelect = typeof chuDe.$inferSelect;
-export type ChuDeInsert = typeof chuDe.$inferInsert;
-
-// --- KIỂU CHO DETAI ---
-export type DeTaiSelect = typeof deTai.$inferSelect;
-export type DeTaiInsert = typeof deTai.$inferInsert;
-
-// --- KIỂU CHO CONGVIEC ---
-export type CongViecSelect = typeof congViec.$inferSelect;
-export type CongViecInsert = typeof congViec.$inferInsert;
-
-// --- KIỂU CHO THAMGIADT ---
-export type ThamGiaDtSelect = typeof thamGiaDt.$inferSelect;
-export type ThamGiaDtInsert = typeof thamGiaDt.$inferInsert;
